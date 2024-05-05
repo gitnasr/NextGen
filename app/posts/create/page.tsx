@@ -17,35 +17,56 @@ const PostCreate = () => {
 	const {
 		handleSubmit,
 		register,
-		formState: { errors, isSubmitting,  },
+		formState: { errors, isSubmitting },
 	} = useForm<FormData>({
 		resolver: zodResolver(CreatePost),
 	});
 	async function onSubmit(data: FormData) {
 		console.log(isSubmitting);
 		console.log(data);
-		
+
 		await new Promise<void>((resolve) => {
 			setTimeout(() => {
 				resolve();
-			}, 2000); 
+			}, 2000);
 		});
 		toast.success("Post created successfully");
 		router.push("/");
 	}
 	return (
-		<section className="flex-grow px-4" >
+		<section className='flex-grow px-4'>
 			<h1 className='text-xl font-extrabold'>Create a Post</h1>
-			<form onSubmit={handleSubmit(onSubmit)} className="flex gap-4 flex-col mt-4">
-				<FormInput id='title' register={register("title")} label='Title' errorMessage={errors?.title} inputType={"text"} />
-				<FormInput id='uid' register={register("userId")} label='User ID' errorMessage={errors?.userId} inputType={"text"} />
-				<FormInput id='body' register={register("body")} label='Post Body' errorMessage={errors?.body} inputType={"textarea"} />
-			
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className='flex gap-4 flex-col mt-4'>
+				<FormInput
+					id='title'
+					register={register("title")}
+					label='Title'
+					errorMessage={errors?.title}
+					inputType={"text"}
+				/>
+				<FormInput
+					id='uid'
+					register={register("userId")}
+					label='User ID'
+					errorMessage={errors?.userId}
+					inputType={"text"}
+				/>
+				<FormInput
+					id='body'
+					register={register("body")}
+					label='Post Body'
+					errorMessage={errors?.body}
+					inputType={"textarea"}
+				/>
+
 				<button
-				disabled={isSubmitting}
+					disabled={isSubmitting}
 					type='submit'
-					className='mt-4 disabled:bg-blue-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-				>Create</button>
+					className='mt-4 disabled:bg-blue-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+					Create
+				</button>
 			</form>
 		</section>
 	);
