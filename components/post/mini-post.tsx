@@ -1,18 +1,11 @@
 "use client";
 
+import { MiniPostProps } from "@/types";
 import { PostHeader } from "./header";
 import React from "react";
 import { useRouter } from "next/navigation";
 import useStore from "@/state/store";
 
-interface MiniPostProps {
-	name: string;
-	handler: string;
-	body: string;
-	title: string;
-	id: string;
-	showBody?: boolean;
-}
 const MiniPost: React.FC<MiniPostProps> = ({
 	name,
 	handler,
@@ -31,8 +24,7 @@ const MiniPost: React.FC<MiniPostProps> = ({
 			title,
 			id,
 		});
-        console.log(store.currentPost);
-        
+
 		router.push(`/posts/${id}`);
 	};
 	return (

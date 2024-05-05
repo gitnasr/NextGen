@@ -1,23 +1,13 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import {
 	HydrationBoundary,
 	QueryClient,
-	dehydrate,
-	useQuery,
+	dehydrate
 } from "@tanstack/react-query";
 
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
-import MiniPost from "@/components/post/mini-post";
-import { PostHeader } from "@/components/post/header";
 import Posts from "@/components/post/all-posts";
-
-const getPosts = async () => {
-	const response = await fetch(
-		"https://jsonplaceholder.typicode.com/posts?_start=0&_limit=15"
-	);
-	return response.json();
-};
+import { getPosts } from "@/API";
 
 export default async function Home() {
 	const queryClient = new QueryClient();

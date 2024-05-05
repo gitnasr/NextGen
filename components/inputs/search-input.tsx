@@ -1,16 +1,16 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 
 interface SearchInputProps {
-	onChange: () => void
+	onChange: ChangeEventHandler<HTMLInputElement>;
 }
-const SearchInput: React.FC<SearchInputProps> = ({onChange}) => {
+const SearchInput: React.FC<SearchInputProps> = ({ onChange }) => {
 	return (
-			<input
-				onChange={onChange}
-				type='text'
-				placeholder='Search...'
-				className='border border-gray-300 rounded-lg p-2 w-full mt-4'
-			/>
+		<input
+			onChange={onChange}
+			type='text'
+			placeholder='Search...'
+			className='border border-gray-300 rounded-lg p-2 w-full mt-4'
+		/>
 	);
 };
 

@@ -1,19 +1,14 @@
 'use client'
 
 import { BiComment, BiDislike, BiHeart, BiLike, BiShare } from "react-icons/bi";
-import { useParams, usePathname } from "next/navigation";
 
 import AllComments from "@/components/post/post-comments";
-import Image from "next/image";
 import { PostHeader } from "@/components/post/header";
-import { useEffect } from "react";
+import { getPostById } from "@/API";
+import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import useStore from "@/state/store";
 
-const getPostById = async (id: number) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-    return response.json();
-}
 const PostDetails = () => {
     const params = useParams();
     const store = useStore();

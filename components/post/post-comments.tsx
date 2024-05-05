@@ -1,14 +1,12 @@
 'use client'
 
 import { BiShare } from "react-icons/bi";
+import { Comment } from "@/types";
+import { getComments } from "@/API";
 import { useQuery } from "@tanstack/react-query";
 import useStore from "@/state/store";
 
-const getComments = async (id:number) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments?_start=0&_limit=5`);
-    return response.json();
-};
-const PostComment = ({comment}) => {
+const PostComment = ({comment}: {comment: Comment}) => {
     return (
         <div className='mt-8 p-4-rounded-xl ' >
         <div className='flex flex-row justify-between'>
@@ -38,7 +36,7 @@ const AllComments = () => {
     const { data } = useQuery({ queryKey, queryFn: () => getComments(currentPostId) , enabled: !!currentPostId});
     return (
         <div className='grid grid-cols-1 my-4 gap-4 px-3  w-full '>
-            {data?.map((comment: any) => (
+            {data?.map((comment: Comment) => (
                  <PostComment comment={comment} key={comment.id} />
             ))}
         </div>

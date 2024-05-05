@@ -3,7 +3,6 @@
 import * as z from "zod";
 
 import { CreatePost } from "@/validation/create-post";
-import { ErrorMessage } from "@hookform/error-message";
 import { FormInput } from "@/components/inputs/form-input";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -22,8 +21,6 @@ const PostCreate = () => {
 		resolver: zodResolver(CreatePost),
 	});
 	async function onSubmit(data: FormData) {
-		console.log(isSubmitting);
-		console.log(data);
 
 		await new Promise<void>((resolve) => {
 			setTimeout(() => {

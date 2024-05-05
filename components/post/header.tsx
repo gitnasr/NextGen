@@ -1,7 +1,5 @@
-interface PostHeaderProps {
-	name: string;
-	handler: string;
-}
+import { PostHeaderProps } from "@/types";
+
 export const PostHeader = ({ name, handler }: PostHeaderProps) => {
 	return (
 		<div className='flex flex-row gap-5'>
