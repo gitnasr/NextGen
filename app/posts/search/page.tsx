@@ -11,10 +11,10 @@ import { useState } from "react";
 const SearchPage = () => {
 	const [searchValue, setSearchValue] = useState("");
 	const debouncedSearchValue = useDebounce(searchValue, 300);
-
+	const [searchSource, updateSource] = useState("title")
 	const { isLoading, isError, isSuccess, data } = useQuery({
 		queryKey: ["searchBy", debouncedSearchValue],
-		queryFn: () => getPostBySearch(debouncedSearchValue),
+		queryFn: () => getPostBySearch(debouncedSearchValue,searchSource),
 		enabled: debouncedSearchValue.length > 0,
 	});
 
@@ -49,12 +49,32 @@ const SearchPage = () => {
 	return (
 		<div className='max-w-xl  mx-auto p-4'>
 			<h1 className='font-semibold text-lg'>Search Post</h1>
+			
+
+			<div className="flex flex-col gap-3  ">
 			<SearchInput
 				onChange={({
 					target: { value },
 				}: React.ChangeEvent<HTMLInputElement>) => setSearchValue(value)}
 			/>
+				<div>
+				<label
+					htmlFor='searchBy'
+					className='block text-sm font-medium text-gray-900'>
+					Search By
+				</label>
 
+				<select
+				onChange={(event) => updateSource(event.target.value)}
+					name='searchBy'
+					id='searchBy'
+					className='border border-gray-300 rounded-lg p-2 w-full mt-1'>
+					<option value='title'>In Titles</option>
+					<option value='body'>In Post Content</option>
+					
+				</select>
+				</div>
+			</div>
 			<div className='mt-4'>{renderResult()}</div>
 		</div>
 	);

@@ -2,9 +2,9 @@ const getPostById = async (id: number) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
     return response.json();
 }
-const getPostBySearch = async (searchValue: string) => {
+const getPostBySearch = async (searchValue: string,source:string) => {
 	const data = await fetch(
-		`https://jsonplaceholder.typicode.com/posts?title_like=^${searchValue}`
+		`https://jsonplaceholder.typicode.com/posts?${source}_like=^${searchValue}`
 	);
 	return await data.json();
 };
